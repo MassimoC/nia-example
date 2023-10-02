@@ -82,7 +82,7 @@ module app01 'CARML/app/container-app/main.bicep' = {
     name: appName
     environmentId: modAcaEnvironment.outputs.resourceId
     ingressAllowInsecure:true
-    ingressExternal:false
+    ingressExternal:true
     ingressTargetPort: 9898
     ingressTransport:'auto'
     containers: [

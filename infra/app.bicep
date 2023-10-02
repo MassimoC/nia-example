@@ -63,7 +63,7 @@ module modAcaEnvironment  'CARML/app/managed-environment/main.bicep' = {
     tags: tags
     logAnalyticsWorkspaceResourceId: modLogAnalytics.outputs.resourceId
     enableDefaultTelemetry: false
-    internal: false
+    internal: true
     infrastructureResourceGroup : infrastructureResourceGroupName
     infrastructureSubnetId: subnetResourceId
     workloadProfiles: workloadProfiles

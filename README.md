@@ -43,3 +43,4 @@ az deployment sub create --template-file app.bicep --parameters project=$project
 
 ## Result
 
+![](img/result.jpg)

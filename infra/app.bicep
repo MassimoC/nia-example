@@ -9,7 +9,7 @@ param tags object = {}
 
 @description('Optional. Workload profiles configured for the Managed Environment.')
 param workloadProfiles array = [ 
-{
+  {
     name: 'Consumption'
     workloadProfileType: 'Consumption'
   }
@@ -67,35 +67,36 @@ module modAcaEnvironment  'CARML/app/managed-environment/main.bicep' = {
   ]
 }
 
+
 // podInfo on ACA
-// module app01 'CARML/app/container-app/main.bicep' = {
-//   name: take('${deploymentName}-app', 58)
-//   scope: resourceGroup(resourceGroupName)
-//   params: {
-//     name: appName
-//     environmentId: modAcaEnvironment.outputs.resourceId
-//     ingressAllowInsecure:true
-//     ingressExternal:true
-//     ingressTargetPort: 9898
-//     ingressTransport:'auto'
-//     containers: [
-//       {
-//         image: 'ghcr.io/stefanprodan/podinfo:latest'
-//         name: appName
-//         resources:{
-//           cpu: json('1')
-//           memory:'2Gi'
-//         }
-//       }
-//     ]
-//     scaleMinReplicas : 1
-//     scaleMaxReplicas: 3
-//     workloadProfileName: 'Consumption'
-//     location: location
-//     tags: tags
-//   }
-//   dependsOn: [
-//     modAcaEnvironment
-//   ]
-// }
+module app01 'CARML/app/container-app/main.bicep' = {
+  name: take('${deploymentName}-app', 58)
+  scope: resourceGroup(resourceGroupName)
+  params: {
+    name: appName
+    environmentId: modAcaEnvironment.outputs.resourceId
+    ingressAllowInsecure:true
+    ingressExternal:true
+    ingressTargetPort: 9898
+    ingressTransport:'auto'
+    containers: [
+      {
+        image: 'ghcr.io/stefanprodan/podinfo:latest'
+        name: appName
+        resources:{
+          cpu: json('1')
+          memory:'2Gi'
+        }
+      }
+    ]
+    scaleMinReplicas : 1
+    scaleMaxReplicas: 3
+    workloadProfileName: 'Consumption'
+    location: location
+    tags: tags
+  }
+  dependsOn: [
+    modAcaEnvironment
+  ]
+}
 

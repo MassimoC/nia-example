@@ -1,7 +1,3 @@
-metadata name = 'App ManagedEnvironments'
-metadata description = 'This module deploys an App Managed Environment (also known as a Container App Environment).'
-metadata owner = 'Azure/module-maintainers'
-
 @description('Required. Name of the Container Apps Managed Environment.')
 param name string
 
@@ -16,6 +12,13 @@ param tags object = {}
 
 @description('Optional. Array of role assignment objects that contain the \'roleDefinitionIdOrName\' and \'principalId\' to define RBAC role assignments on this resource. In the roleDefinitionIdOrName attribute, you can provide either the display name of the role definition, or its fully qualified ID in the following format: \'/providers/Microsoft.Authorization/roleDefinitions/c2f4ef07-c644-48eb-af81-4b1b4947fb11\'.')
 param roleAssignments array = []
+
+// @allowed([
+//   'Consumption'
+//   'Premium'
+// ])
+// @description('Optional. Managed environment SKU.')
+// param skuName string = 'Consumption'
 
 @description('Optional. Logs destination.')
 param logsDestination string = 'log-analytics'
@@ -39,6 +42,9 @@ param infrastructureSubnetId string = ''
 
 @description('Conditional. Name of the platform-managed resource group created for the Managed Environment to host infrastructure resources. If a subnet ID is provided, this resource group will be created in the same subscription as the subnet.')
 param infrastructureResourceGroup string = ''
+
+@description('Optional. The configuration of Keda component.')
+param kedaConfiguration object = {}
 
 @description('Optional. Boolean indicating the environment only has an internal load balancer. These environments do not have a public static IP resource. If set to true, then "infrastructureSubnetId" must be provided.')
 param internal bool = false
